@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball{
+            /* 定义一个变量表示动画的延迟时间 */
+            --delay:0s;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: red;
+            margin-bottom: 50px;
+            animation: move 1s var(--delay) linear forwards paused;
+            /* 移动运动时间轴，让小球停留在中间某一个点，其他交给浏览器去计算。 */
+            /* 如果移动时间轴：动画延迟 */
+            /* animation-play-state: running or paused */
+        }
+        /* 写一个动画 */
+        @keyframes move {
+            /* 开始 */
+            50%{
+                transform: translate(100px) scale(1.5);
+            }
+            /* 最终 */
+           100%{ 
+                transform: translate(200px) scale(1);
+           } 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="ball"></div>
+        <!-- 滑块关联动画的延迟时间 -->
+        <input type="range" min="0" max="1" step="0.01" />
+    </div>
+
+    <script>
+        // js监听
+        const inp = document.querySelector('input')
+        const ball = document.querySelector('.ball')
+        const call = () => {
+            ball.style.setProperty('--delay', `-${inp.value}s`)
+            console.log(inp.value);
+        }
+        inp.oninput = call
+        call()
+    </script>
+</body>
+</html>

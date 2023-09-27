@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #000;
+        }
+        .container{
+            --delay:0;
+            padding-top: 300px;
+        }
+        .eye{
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #fff;
+            /* -webkit-clip-path: polygon(0 70%, 100% 0, 100% 100%, 0% 100%); */
+            /* clip-path: polygon(0 70%, 100% 0, 100% 100%, 0% 100%); */
+            animation: eyeChange 1s var(--delay) linear forwards paused;
+        }
+        /* 写一个动画 */
+        @keyframes eyeChange {
+            /* 开始 */
+            0%{
+                clip-path: polygon(0 70%, 100% 0, 100% 100%, 0% 100%);
+            }
+            /* 最终 */
+           100%{ 
+                clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
+           } 
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="eye"></div>
+        <!-- 滑块关联动画的延迟时间 -->
+        <input type="range" min="0" max="1" step="0.01" />
+    </div>
+    <a href="http://tools.jb51.net/code/css3path" target="_blank">切割网址</a>
+
+    <script>
+        // js监听
+        const inp = document.querySelector('input')
+        const container = document.querySelector('.container')
+        const call = () => {
+            container.style.setProperty('--delay', `-${inp.value}s`)
+        }
+        inp.oninput = call
+        call()
+    </script>
+</body>
+</html>
